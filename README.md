@@ -3,7 +3,7 @@ You can run the pre-compiled version of this by just opening the exxcutable file
 
 Source code is the main directory.
 
-# demo
+## demo
 https://i.imgur.com/RYhdRk8.gif
 
 Thanks so much! =)
