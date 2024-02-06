@@ -7,3 +7,5 @@ Source code is the main directory.
 https://i.imgur.com/RYhdRk8.gif
 
 Thanks so much! =)
+
+(a good friend once told me "this could've been written down in a note book instead")
