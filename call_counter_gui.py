@@ -40,8 +40,8 @@ def add_call_field():
         # draw the text box field for counting the calls
         Entry(root, textvariable=call_counts[new_call_type]).grid(row=len(call_counts) + 1, column=1)
         # draw the plus/minus buttons for changing the values
-        Button(root, text='+', command=lambda var=call_counts[new_call_type]: var.set(var.get() + 1)).grid(row=len(call_counts) + 1, column=2)
-        Button(root, text='-', command=lambda var=call_counts[new_call_type]: var.set(max(var.get() - 1, 0))).grid(row=len(call_counts) + 1, column=3)
+        Button(root, text='+', command=lambda var=call_counts[new_call_type]: var.set(var.get() + 1), bg='green').grid(row=len(call_counts) + 1, column=2)
+        Button(root, text='-', command=lambda var=call_counts[new_call_type]: var.set(max(var.get() - 1, 0)), bg='red').grid(row=len(call_counts) + 1, column=3)
 
         # reposition the "End Shift" button below the last call field
         end_shift_button.grid(row=len(call_counts) + 2, column=0, columnspan=2, pady=10)
@@ -58,11 +58,11 @@ def end_shift():
 Label(root, text="Add New Call Type:").grid(row=0, column=0, sticky=W)
 call_type_entry = Entry(root)
 call_type_entry.grid(row=0, column=1)
-add_button = Button(root, text="Add", command=add_call_field)
+add_button = Button(root, text="Add", bg='blue', command=add_call_field)
 add_button.grid(row=0, column=2)
 
 # button to end shift
-end_shift_button = Button(root, text="End Shift", command=end_shift)
+end_shift_button = Button(root, text="End Shift", bg='orange', command=end_shift)
 
 # run the main program's loop
 root.mainloop()
