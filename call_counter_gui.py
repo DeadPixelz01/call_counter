@@ -1,15 +1,27 @@
 from tkinter import *
 from tkinter import messagebox
 from datetime import date
+import os
 
 # a global variable to store the user's name
 username = ""
+today = date.today()
+# grab the week number from today's date so that we can create/write to a dir for that week
+week_number = today.strftime("%U")
+# check if the dir exist - make one if not
+week_directory = f"Week_{week_number}"
+if not os.path.exists(week_directory):
+    os.makedirs(week_directory)
 
 def write_to_file():
+    # calculate total calls
     total_calls = sum(var.get() for var in call_counts.values())
-    output_file_name = '{}_{}_call-logs.csv'.format(username,today)
+    # create a file to write to (i.e Week_8/Alex_DATE_call-logs.csv)
+    output_file_name = '{}/{}_{}_call-logs.csv'.format(week_directory,username,today)
     with open(output_file_name, "w") as output_f:
+        # write total calls
         output_f.write("Total calls,{}\n".format(total_calls))
+        # write all the calls by call type
         for call_type, count_var in call_counts.items():
             output_f.write("{},{}\n".format(call_type, count_var.get()))
     print(f'Writing call counts/records to {output_file_name}...')
@@ -41,8 +53,6 @@ def login():
         login_window.destroy()
     else:
         messagebox.showerror("Error", "Please enter a username.")
-
-today = date.today()
 
 # create the initial login window
 login_window = Tk()
