@@ -1,0 +1,7 @@
+TiD Fix
+Docket Unlock
+Processing Eftpos
+Password Reset
+Computer Locked
+Payment Request
+Pin Pad Offline

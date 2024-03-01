@@ -13,6 +13,10 @@ week_directory = f"Week_{week_number}"
 if not os.path.exists(week_directory):
     os.makedirs(week_directory)
 
+# autocomplete call suggestions
+with open("common_call_types.txt", "r") as file:
+    common_call_types = [line.strip() for line in file.readlines()]
+
 def write_to_file():
     # calculate total calls
     total_calls = sum(var.get() for var in call_counts.values())
@@ -54,6 +58,16 @@ def login():
     else:
         messagebox.showerror("Error", "Please enter a username.")
 
+# main func for auto completing - this is kinda buggy atm but it does what i need it to do
+def autocomplete(event):
+    entered_text = call_type_entry.get()
+    if entered_text:
+        matches = [call for call in common_call_types if call.startswith(entered_text)]
+        # show the first matching call type in autocomplete
+        autocomplete_var.set(matches[0])
+        # highlight the rest of the text
+        call_type_entry.select_range(len(entered_text), END)
+
 # create the initial login window
 login_window = Tk()
 login_window.title("Login")
@@ -74,8 +88,11 @@ root.title(f'{username} Call Counter')
 call_counts = {}
 
 Label(root, text="Add New Call Type:").grid(row=0, column=0, sticky=W)
-call_type_entry = Entry(root)
+autocomplete_var = StringVar()
+call_type_entry = Entry(root, textvariable=autocomplete_var)
 call_type_entry.grid(row=0, column=1)
+# binds the autocomplete function to key release event
+call_type_entry.bind("<KeyRelease>", autocomplete)
 add_button = Button(root, text="Add", bg='blue', command=add_call_field)
 add_button.grid(row=0, column=2)
 
