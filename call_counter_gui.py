@@ -60,9 +60,9 @@ def login():
 
 # main func for auto completing - this is kinda buggy atm but it does what i need it to do
 def autocomplete(event):
-    entered_text = call_type_entry.get()
+    entered_text = call_type_entry.get().lower()
     if entered_text:
-        matches = [call for call in common_call_types if call.startswith(entered_text)]
+        matches = [call for call in common_call_types if call.lower().startswith(entered_text)]
         # show the first matching call type in autocomplete
         autocomplete_var.set(matches[0])
         # highlight the rest of the text
